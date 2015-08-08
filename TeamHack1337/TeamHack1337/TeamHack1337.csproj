@@ -68,23 +68,20 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Cache.cs" />
-    <Compile Include="Controllers\ApiCallers.cs" />
-    <Compile Include="Controllers\BusStopGenerator.cs" />
-    <Compile Include="Controllers\Helpers.cs" />
+    <Compile Include="Controllers\BusStop.cs" />
+    <Compile Include="Controllers\BusStopCreator.cs" />
+    <Compile Include="Controllers\BusStopList.cs" />
+    <Compile Include="Controllers\Coordinate.cs" />
+    <Compile Include="Controllers\Route.cs" />
+    <Compile Include="Controllers\StopFromStopId.cs" />
     <Compile Include="Main.cs" />
-    <Compile Include="Model\1337 models\BusStop.cs" />
-    <Compile Include="Model\AT API models\BusStopList.cs" />
-    <Compile Include="Model\AT API models\Route.cs" />
-    <Compile Include="Model\AT API models\RoutesByStopIdClass.cs" />
-    <Compile Include="Model\AT API models\ShapeByIdType.cs" />
-    <Compile Include="Model\AT API models\Stop.cs" />
+    <Compile Include="Model\RealTimeBoardClass.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
-    <Content Include="Resources\stop_list.csv">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    <None Include="Properties\PublishProfiles\Hack1337api.pubxml" />
+    <None Include="Properties\PublishProfiles\TeamHack1337Api%28Default-Web-AustraliaEast%29.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -92,7 +89,9 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Resources\" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

@@ -66,7 +66,7 @@ namespace TeamHack1337.Controllers
             var json = JsonConvert.DeserializeObject<StopRootObject>(s);
 
             Stop stop = new Stop();
-            stop.latitude = json.response.stop_id;
+            stop.latitude = json.response[0].stop_lat;
 
             Debug.WriteLine("Number of routes: " + routes.Count);
         }
