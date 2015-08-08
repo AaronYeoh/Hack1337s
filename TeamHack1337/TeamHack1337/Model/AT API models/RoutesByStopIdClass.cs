@@ -24,5 +24,6 @@ namespace TeamHack1337.Model.AT_API_models
         public string status { get; set; }
         public List<RoutesResponse> response { get; set; }
         public object error { get; set; }
+
     }
 }
