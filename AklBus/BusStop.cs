@@ -35,8 +35,8 @@ namespace AklBus
 
             foreach(var response in json.response) {
                 routes.Add(new Route(response.route_id));
-                
             }
+            Console.WriteLine(routes.Count);
         }
 
         public void getStopID()
