@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Reflection;
 using System.Web;
 using Newtonsoft.Json;
 
@@ -26,16 +27,16 @@ namespace TeamHack1337.Controllers
         }
 
         //api.at.govt.nz/v1/gtfs/stops/stopCode/8439?api_key=ab88cbf9-a815-4ddd-9a93-17ab16caccce
-        public void getStopID()
-        {
-            WebClient webClient = new WebClient();
-            string s = webClient.DownloadString("http://api.at.govt.nz/v1/gtfs/stops/stopCode/" + stop_code + "?api_key=6fbfc488-fec6-4de0-abaa-3dc5afe31002");
-            var json = JsonConvert.DeserializeObject<StopFromStopIDRootObject>(s);
+        //public void getStopID()
+        //{
+        //    WebClient webClient = new WebClient();
+        //    string s = webClient.DownloadString("http://api.at.govt.nz/v1/gtfs/stops/stopCode/" + stop_code + "?api_key=6fbfc488-fec6-4de0-abaa-3dc5afe31002");
+        //    var json = JsonConvert.DeserializeObject<StopFromStopIDRootObject>(s);
 
-            stop_id = json.response[0].stop_id;
-            stop_lat = json.response[0].stop_lat;
-            stop_lon = json.response[0].stop_lon;
-        }
+        //    stop_id = json.response[0].stop_id;
+        //    stop_lat = json.response[0].stop_lat;
+        //    stop_lon = json.response[0].stop_lon;
+        //}
 
         public void getRoutes()
         {
@@ -52,28 +53,29 @@ namespace TeamHack1337.Controllers
 
 
 
-        //TODO: Must find a way to replace this
-        //public void getStopID()
-        //{
-        //    var file = new System.IO.StreamReader(filename);
-        //    string line;
-        //    string id;
-        //    while ((line = file.ReadLine()) != null)
-        //    {
-        //        if (line.Length != 0)
-        //        {
+        //TODO: Must find a way to fix
+        public void getStopID()
+        {
+            var stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("stop_list.txt");
+            var file = new System.IO.StreamReader(stream);
+            string line;
+            string id;
+            while ((line = file.ReadLine()) != null)
+            {
+                if (line.Length != 0)
+                {
                     
-        //            id = line.Substring(0, 4);
+                    id = line.Substring(0, 4);
                    
-        //            if (stop_code.Equals(id))
-        //            {
-        //                //stop_id = id;
+                    if (stop_code.Equals(id))
+                    {
+                        //stop_id = id;
                         
-        //            }
-        //        }
-        //    }
-        //    file.Close();
-        //}
+                    }
+                }
+            }
+            file.Close();
+        }
     }
 
 }
