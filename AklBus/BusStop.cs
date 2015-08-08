@@ -29,33 +29,26 @@ namespace AklBus
 
         public void getRoutes()
         {
-            stop_id = "0001";
             string s = webClient.DownloadString("http://api.at.govt.nz/v1/gtfs/routes/stopid/" + stop_id + "?api_key=6fbfc488-fec6-4de0-abaa-3dc5afe31002");
             var json = JsonConvert.DeserializeObject<BusStopList.RootObjectRoutes>(s);
 
             foreach(var response in json.response) {
                 routes.Add(new Route(response.route_id));
             }
-            Console.WriteLine(routes.Count);
         }
 
         public void getStopID()
         {
             var file = new System.IO.StreamReader(filename);
             string line;
-            string id;
+            string[] things;
             while ((line = file.ReadLine()) != null)
             {
-                if (line.Length != 0)
+                things = line.Split(' ');
+                if (stop_code.Equals(things[1]))
                 {
-                    
-                    id = line.Substring(0, 4);
-                   
-                    if (stop_code.Equals(id))
-                    {
-                        //stop_id = id;
-                        
-                    }
+                    stop_id = things[0];
+                    break;
                 }
             }
             file.Close();
