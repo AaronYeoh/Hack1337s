@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Net;
+using System.Threading.Tasks;
 using System.Web;
 
 namespace TeamHack1337.Controllers
@@ -26,11 +28,24 @@ namespace TeamHack1337.Controllers
 
     public class GetStringFromUrl : IStringGetter
     {
-        public string GetString(string url)
+        public async Task<string> GetString(string url)
         {
             WebClient webClient = new WebClient();
 
-            var str = webClient.
+            try
+            {
+                if (Uri.IsWellFormedUriString(url, UriKind.RelativeOrAbsolute))
+                {
+                    var uri = new Uri(url);
+                    var str = webClient.DownloadString(uri);
+                    return str;
+                }
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine("url= " + url + "Something happened in GetStringFromUrl: " + e);
+            }
+            return "";
         }
     }
 
