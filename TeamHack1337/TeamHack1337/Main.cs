@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.IO;
+using System.Text;
 using FileHelpers;
 using Nancy;
 using Newtonsoft.Json;
@@ -30,7 +31,8 @@ namespace TeamHack1337
             Get["/initiatecacherefresh"] = _ =>
             {
                 //refresh
-                return "Done";
+                return File.ReadAllText("/Resources/stop_list.csv");
+
             };
         }
 
