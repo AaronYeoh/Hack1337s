@@ -12,7 +12,7 @@ namespace AklBus {
             
             string stop_code = "2238";
             BusStop busStop = new BusStop(stop_code);
-            Console.WriteLine(busStop.routes[0].shape_id);
+            Console.WriteLine(busStop.routes[0].coordinates);
             Console.ReadKey();
         }
     }

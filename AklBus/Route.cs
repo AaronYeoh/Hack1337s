@@ -25,7 +25,7 @@ namespace AklBus
 
         public void getShapePoints() 
         {
-            string s = webClient.DownloadString("");
+            string s = webClient.DownloadString("http://api.at.govt.nz/v1/gtfs/shapes/shapeId/" + shape_id + "?api_key=6fbfc488-fec6-4de0-abaa-3dc5afe31002");
             var json = JsonConvert.DeserializeObject<BusStopList.RootObjectShapePoints>(s);
 
             foreach (var response in json.response)
