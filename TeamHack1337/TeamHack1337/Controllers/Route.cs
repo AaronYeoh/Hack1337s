@@ -15,7 +15,7 @@ namespace TeamHack1337.Controllers
         public string shape_id { get; set; }
         public string route_short_name { get; set; }
         public List<Coordinate> coordinates;
-        public List<DateTime> ArrivalTimes { get; set; }
+        public List<string> ArrivalTimes { get; set; }
         //public List<DateTime> EstimatedArrivalTimes { get; set; }
 
 
@@ -26,7 +26,6 @@ namespace TeamHack1337.Controllers
             coordinates = new List<Coordinate>();
             getShapeID();
             getShapePoints();
-            getArrivalTimes(stop_code);
         }
 
         public void getShapePoints() 
@@ -37,7 +36,7 @@ namespace TeamHack1337.Controllers
 
             foreach (var response in json.response)
             {
-                coordinates.Add(new Coordinate(response.shape_pt_lat, response.shape_pt_lon));
+                coordinates.Add(new Coordinate(this.shape_id, response.shape_pt_lat, response.shape_pt_lon));
             }
         }
 
@@ -54,35 +53,6 @@ namespace TeamHack1337.Controllers
             }
         }
 
-        public void getArrivalTimes(string stop_code)
-        {
-            WebClient webClient = new WebClient();
-
-            try
-            {
-                string s = webClient.DownloadString("http://api.maxx.co.nz/RealTime/v2/Departures/Stop/" + stop_code);
-                var json = JsonConvert.DeserializeObject<RealTimeBoardClass.RootObject>(s);
-                foreach (var movement in json.Movements)
-                {
-                    if (movement.Route == route_short_name)
-                    {
-                        if (movement.ExpectedArrivalTime == null)
-                        {
-                            ArrivalTimes.Add(movement.ActualArrivalTime);
-                        }
-                        else
-                        {
-                            ArrivalTimes.Add(movement.ExpectedArrivalTime is DateTime
-                                ? (DateTime) movement.ExpectedArrivalTime
-                                : new DateTime());
-                        }
-                    }
-                }
-            }
-            catch (Exception e)
-            {
-                Debug.WriteLine("GetArrivalTime Fail. Try again? Details:" + e);
-            }
-        }
+        
     }
 }

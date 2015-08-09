@@ -18,21 +18,23 @@ namespace TeamHack1337
             Get["/stop_code={stop_code}"] = parameters =>
             {
                 BusStopCreator busStopCreator = new BusStopCreator();
+
+                //Create busstop
                 BusStop busStop = busStopCreator.CreateBusStop(parameters.stop_code.ToString());
-                string str =  JsonConvert.SerializeObject(busStop);
+
+                string str = JsonConvert.SerializeObject(busStop);
                 var jsonBytes = Encoding.UTF8.GetBytes(str);
                 return new Response
                 {
                     ContentType = "application/json",
                     Contents = s => s.Write(jsonBytes, 0, jsonBytes.Length)
                 };
-                
-            };
-            Get["/initiatecacherefresh"] = _ =>
-            {
-                //refresh
-                return File.ReadAllText("/Resources/stop_list.csv");
 
+            };
+            Get["/bus_stops"] = _ =>
+            {
+
+                return "Hello";
             };
         }
 

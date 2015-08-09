@@ -10,8 +10,11 @@ namespace TeamHack1337.Controllers
         public double latitude { get; set; }
         public double longitude { get; set; }
 
-        public Coordinate(double latitude, double longitude)
+        public string shapeid { get; set; }
+
+        public Coordinate(string shapeid, double latitude, double longitude)
         {
+            this.shapeid = shapeid;
             this.latitude = latitude;
             this.longitude = longitude;
         }

@@ -17,8 +17,8 @@ namespace TeamHack1337.Model
             public string DepartureBoardingActivity { get; set; }
             public object DeparturePlatformName { get; set; }
             public string DestinationDisplay { get; set; }
-            public object ExpectedArrivalTime { get; set; }
-            public object ExpectedDepartureTime { get; set; }
+            public DateTime? ExpectedArrivalTime { get; set; }
+            public DateTime? ExpectedDepartureTime { get; set; }
             public bool InCongestion { get; set; }
             public bool Monitored { get; set; }
             public string Route { get; set; }
