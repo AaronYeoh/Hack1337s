@@ -34,6 +34,7 @@ namespace TeamHack1337.Controllers
         public void getArrivalTimes(string stop_code)
         {
             WebClient webClient = new WebClient();
+            
 
             string s = webClient.DownloadString("http://api.maxx.co.nz/RealTime/v2/Departures/Stop/" + stop_code);
             var json = JsonConvert.DeserializeObject<RealTimeBoardClass.RootObject>(s);
@@ -54,13 +55,13 @@ namespace TeamHack1337.Controllers
                         {
                             if (movement.ExpectedArrivalTime != null)
                             {
-                                route.ArrivalTimes.Add(
-                                    movement.ExpectedArrivalTime.GetValueOrDefault().ToLocalTime().ToShortTimeString());
+                                var nztime = DateToNZTime(movement.ExpectedArrivalTime.GetValueOrDefault());
+                                route.ArrivalTimes.Add(nztime);
                             }
                             else
                             {
-                                route.ArrivalTimes.Add(
-                                    movement.ActualArrivalTime.ToLocalTime().ToLocalTime().ToShortTimeString());
+                                var nztime = DateToNZTime(movement.ActualArrivalTime);
+                                route.ArrivalTimes.Add(nztime);
                             }
                         }
                     }
@@ -70,6 +71,16 @@ namespace TeamHack1337.Controllers
                     Debug.WriteLine("GetArrivalTime Fail. Try again? Details:" + e);
                 }
             }
+        }
+
+        private static string DateToNZTime(DateTime time)
+        {
+            var nzTimeZone = TimeZoneInfo.FindSystemTimeZoneById("New Zealand Standard Time");
+            var nzTime = TimeZoneInfo.ConvertTime(time, nzTimeZone);
+            //var nzTime = TimeZoneInfo.ConvertTimeFromUtc(time, nzTimeZone);
+
+            var shortTime = nzTime.ToShortTimeString();
+            return shortTime;
         }
 
         public void getRoutes()

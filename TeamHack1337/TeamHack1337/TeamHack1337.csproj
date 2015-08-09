@@ -81,11 +81,13 @@
     <Compile Include="Controllers\StopFromStopId.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="Model\RealTimeBoardClass.cs" />
+    <Compile Include="Model\SimpleBusStop.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StopList.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
+    <None Include="Properties\PublishProfiles\at1337testapi %282%29.pubxml" />
     <None Include="Properties\PublishProfiles\at1337testapi.pubxml" />
     <None Include="Properties\PublishProfiles\Hack1337api %282%29.pubxml" />
     <None Include="Properties\PublishProfiles\Hack1337api.pubxml" />
