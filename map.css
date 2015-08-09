@@ -1,15 +1,18 @@
 html,
 body {
   height: 100%;
-  background-color: #333;
 }
 
 body {
-  color: #333;
+  color: #fff;
   text-align: center;
   text-shadow: 0 1px 3px rgba(0, 0, 0, .5);
 }
 /* Extra markup and styles for table-esque vertical and horizontal centering */
+
+.form-group{
+  background-color: transparent !important;
+}
 
 .site-wrapper {
   display: table;
@@ -29,7 +32,12 @@ body {
   margin-right: auto;
   margin-left: auto;
   position: absolute;
-  top: 30%
+  top: 30%;
+  left: 20%;
+}
+.cover-container.cover-container-top {
+  top: 5%;
+  left: 100px;
 }
 /* Padding for spacing */
 
@@ -73,6 +81,7 @@ body {
     width: 700px;
   }
 }
+
 
 .bus-stop-input {
   width:60% !important;
