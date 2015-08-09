@@ -51,7 +51,8 @@ $(document).ready(function () {
 	var origin = new google.maps.LatLng(data.stop_lat, data.stop_lon);
 	var marker = new google.maps.Marker({
       position: origin,
-      title: busStopNum
+      title: busStopNum,
+	  animation: google.maps.Animation.BOUNCE
 	});
 	marker.setMap(map);
 	map.panTo(origin);
