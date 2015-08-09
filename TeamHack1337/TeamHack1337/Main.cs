@@ -55,11 +55,11 @@ namespace TeamHack1337
 
                 string str = JsonConvert.SerializeObject(busStopList);
                 var jsonBytes = Encoding.UTF8.GetBytes(str);
-                return new Response
-                {
-                    ContentType = "application/json",
-                    Contents = s => s.Write(jsonBytes, 0, jsonBytes.Length)
-                };
+                var resp = new Response();
+                resp.ContentType = "application/json";
+                resp.Contents = s => s.Write(jsonBytes, 0, jsonBytes.Length);
+                resp.WithHeader("Access-Control-Allow-Origin", "*");
+                return resp;
             };
         }
 
