@@ -22,6 +22,8 @@ $(document).ready(function () {
     busStopNum = $("#stopNumField").val();
     var requestURL = "http://at1337testapi.azurewebsites.net/stop_code=" + busStopNum;
     
+	
+	
     console.log('submit', event);
 
     event.preventDefault();
@@ -32,7 +34,8 @@ $(document).ready(function () {
       url: requestURL,
       success: function (data) {
         console.log('updating map', data);
-        updateMap(data)
+        updateMap(data);
+		$('.cover-container').addClass('cover-container-top');
       },
       error: function () {
         console.log('error');
@@ -48,8 +51,7 @@ $(document).ready(function () {
 	var origin = new google.maps.LatLng(data.stop_lat, data.stop_lon);
 	var marker = new google.maps.Marker({
       position: origin,
-      title: busStopNum,
-	  label: busStopNum
+      title: busStopNum
 	});
 	marker.setMap(map);
 	map.panTo(origin);
