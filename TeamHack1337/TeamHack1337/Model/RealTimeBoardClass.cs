@@ -9,8 +9,8 @@ namespace TeamHack1337.Model
     {
         public class Movement
         {
-            public DateTime ActualArrivalTime { get; set; }
-            public DateTime ActualDepartureTime { get; set; }
+            public DateTime? ActualArrivalTime { get; set; }
+            public DateTime? ActualDepartureTime { get; set; }
             public string ArrivalBoardingActivity { get; set; }
             public object ArrivalPlatformName { get; set; }
             public string ArrivalStatus { get; set; }

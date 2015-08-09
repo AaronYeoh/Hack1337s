@@ -26,8 +26,16 @@ namespace TeamHack1337.Controllers
             routes = new List<Route>();
             
             getStopID();
-            getRoutes();
-            getArrivalTimes(stop_code);
+
+            if (stop_id != null)
+            {
+                getRoutes();
+                getArrivalTimes(stop_code);
+            }
+            else
+            {
+                Debug.WriteLine("Bad stop code");
+            }
 
         }
 
@@ -60,7 +68,7 @@ namespace TeamHack1337.Controllers
                             }
                             else
                             {
-                                var nztime = DateToNZTime(movement.ActualArrivalTime);
+                                var nztime = DateToNZTime(movement.ActualArrivalTime.GetValueOrDefault());
                                 route.ArrivalTimes.Add(nztime);
                             }
                         }
@@ -86,14 +94,22 @@ namespace TeamHack1337.Controllers
         public void getRoutes()
         {
             WebClient webClient = new WebClient();
-            string s = webClient.DownloadString("http://api.at.govt.nz/v1/gtfs/routes/stopid/" + stop_id + "?api_key=6fbfc488-fec6-4de0-abaa-3dc5afe31002");
-            var json = JsonConvert.DeserializeObject<BusStopList.RootObjectRoutes>(s);
-
-            foreach (var response in json.response)
+            try
             {
-                routes.Add(new Route(response.route_id, response.route_short_name, stop_code));
+                string s =
+                    webClient.DownloadString("http://api.at.govt.nz/v1/gtfs/routes/stopid/" + stop_id +
+                                             "?api_key=6fbfc488-fec6-4de0-abaa-3dc5afe31002");
+                var json = JsonConvert.DeserializeObject<BusStopList.RootObjectRoutes>(s);
+
+                foreach (var response in json.response)
+                {
+                    routes.Add(new Route(response.route_id, response.route_short_name, stop_code));
+                }
+                Debug.WriteLine(routes.Count);
             }
-            Console.WriteLine(routes.Count);
+            catch (Exception e)
+            {
+            }
         }
 
 
