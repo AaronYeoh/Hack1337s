@@ -1,24 +1,38 @@
 <!DOCTYPE html>
 <html>
   <head>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
   <script src="jquery-2.1.4.min.js"></script>
     <style type="text/css">
-      html, body, #map-canvas { height: 100%; margin: 0; padding: 0;}
+      #map-canvas { height: 100%; margin: 0; padding: 0;}
     .input { height: 50px; width: 100%; background-color: blue;
     position: absolute; top: 101px}
     </style>
+    <link rel="stylesheet" type="text/css" href="map.css">
     <script type="text/javascript"
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCxq4HFwFolVwN5GcDRMmgSInQkHpYfxmA">
     </script>
   </head>
   <body>
-  <div id="map-canvas"></div>
-  <div class="input">
-  <form id="bus-form">
-    <input type="number" id="stopNumField"/>
-    <button id="bus-submit-btn" type="submit" name="submit">Submit</button>
-  </form>
-  </div>
+  
+
+    <div class="site-wrapper col-md-6 panel panel-default">
+      <div class="site-wrapper-inner">
+      <div id="map-canvas"></div>
+        <div  class="cover-container">
+          <div  class="inner cover">  
+
+            <form id="bus-form" class="form-group">
+              <div class="lead ">
+                <input id="stopNumField" type="text" class="form-control bus-stop-input " placeholder="Enter bus stop number"/>
+                <button id="bus-submit-btn" type="submit" class="bus-stop-button btn btn-lg btn-default">See routes</button>
+              </div>
+             </form>
+          </div> 
+        </div>
+      </div>
+    </div>
+
   <script type="text/javascript" src="map.js"></script>
   </body>
 </html>
