@@ -63,10 +63,11 @@ $(document).ready(function () {
       var strokeColour = colours[currentColourIndex];
       console.log("stroke color" + strokeColour);
       var routePolygon = new google.maps.Polyline({
-        paths: routePath,
+        path: routePath,
+		geodesic: true,
         strokeColor: strokeColour,
         strokeOpacity: 0.8,
-        strokeWeight: 2
+        strokeWeight: 4
       });
       currentColourIndex++;
       if (currentColourIndex >= colours.length) {
