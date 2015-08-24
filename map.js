@@ -2,6 +2,7 @@ $(document).ready(function () {
   var map;
   var colours = ['#FF0000', '#00FF00', '#0000FF', '#FFFF00', '#FF00FF'];
   var currentColourIndex = 0;
+  var busStopNum;
 
   console.log('doc ready');
 
@@ -10,7 +11,7 @@ $(document).ready(function () {
       center: { lat: -36.8406, lng: 174.74},
       zoom: 13,
       //disableDefaultUI: true,
-      streetViewControl: false
+      //streetViewControl: false
     };
     map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
   }
@@ -18,9 +19,11 @@ $(document).ready(function () {
 
 
   $('#bus-form').on('submit', function (event) {
-    var busStopNum = $("#stopNumField").val();
-    var requestURL = "http://at1337testapi.azurewebsites.net/stop_code=" + busStopNum;
+    busStopNum = $("#stopNumField").val();
+    var requestURL = "http://at1337api.azurewebsites.net/stop_code=" + busStopNum;
     
+	
+	
     console.log('submit', event);
 
     event.preventDefault();
@@ -31,7 +34,8 @@ $(document).ready(function () {
       url: requestURL,
       success: function (data) {
         console.log('updating map', data);
-        updateMap(data)
+        updateMap(data);
+		$('.cover-container').addClass('cover-container-top');
       },
       error: function () {
         console.log('error');
@@ -44,8 +48,15 @@ $(document).ready(function () {
   function updateMap(data) {
     var allRoutes = data.routes;
     var counter = 0;
-
-    console.log('trying to update map');
+	var origin = new google.maps.LatLng(data.stop_lat, data.stop_lon);
+	var marker = new google.maps.Marker({
+      position: origin,
+      title: busStopNum,
+	  animation: google.maps.Animation.BOUNCE
+	});
+	marker.setMap(map);
+	map.panTo(origin);
+	map.setZoom(14);
 
     currentColourIndex = 0;
 
