@@ -37,19 +37,12 @@ namespace TeamHack1337
             {
                 List<SimpleBusStop> busStopList = new List<SimpleBusStop>();
                 StopList stopList = new StopList();
-                var file = stopList.List;
-                var lines = file.Split('\n');
 
-                for (int i = 0; i < lines.Length; i++)
+                var allstops = stopList.AllStops;
+
+                foreach (var stop in allstops)
                 {
-                    var lineElements = lines[i].Split(' ');
-
-                    var stop_id = lineElements[0];
-                    var stop_code = lineElements[1];
-
-                    var stop_lat = lineElements[2];
-                    var stop_lon = lineElements[3];
-                    var busstop = new SimpleBusStop(stop_code, stop_id, stop_lat, stop_lon);
+                    var busstop = new SimpleBusStop(stop.stop_code, stop.stop_id, stop.stop_lat.ToString(), stop.stop_lon.ToString());
                     busStopList.Add(busstop);
                 }
 

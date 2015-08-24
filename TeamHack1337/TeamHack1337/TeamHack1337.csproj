@@ -80,6 +80,7 @@
     <Compile Include="Controllers\Route.cs" />
     <Compile Include="Controllers\StopFromStopId.cs" />
     <Compile Include="Main.cs" />
+    <Compile Include="Model\AllStops.cs" />
     <Compile Include="Model\RealTimeBoardClass.cs" />
     <Compile Include="Model\SimpleBusStop.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -115,25 +115,23 @@ namespace TeamHack1337.Controllers
 
 
 
-        //TODO: Must find a way to fix
         public void getStopID()
         {
             //var stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("stop_list.txt");
             StopList stopList = new StopList();
-            var file = stopList.List;
-            var lines = file.Split('\n');
 
-            for (int i = 0; i < lines.Length; i++)
+            var allstops = stopList.AllStops;
+
+            foreach (var stop in allstops)
             {
-                var lineElements = lines[i].Split(' ');
-                if (stop_code.Equals(lineElements[1]))
+                if (stop_code == stop.stop_code)
                 {
-                    stop_id = lineElements[0];
-                    stop_lat = lineElements[2];
-                    stop_lon = lineElements[3];
-                    break;
+                    stop_id = stop.stop_id;
+                    stop_lat = stop.stop_lat.ToString();
+                    stop_lon = stop.stop_lon.ToString();
                 }
             }
+
         }
     }
 
