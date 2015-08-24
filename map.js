@@ -20,7 +20,7 @@ $(document).ready(function () {
 
   $('#bus-form').on('submit', function (event) {
     busStopNum = $("#stopNumField").val();
-    var requestURL = "http://at1337testapi.azurewebsites.net/stop_code=" + busStopNum;
+    var requestURL = "http://at1337api.azurewebsites.net/stop_code=" + busStopNum;
     
 	
 	
