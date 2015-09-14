@@ -1,12 +1,14 @@
 # Project AT1337 
 #### Team Hack1337s   |   Summer of Tech Hackfest Auckland 2015  | 2 August 2015
 
-##### by [Shawn Wadia](https://github.com/shawnw3) |  [Asher James](https://github.com/asherjames) |  [Aaron Dekker](https://github.com/DefinitelyMaybe) | [Kavita Sreejith](https://github.com/KavitaSreejith) | [Aaron Yeoh](https://github.com/AaronYeoh) | 
+##### by [Shawn Wadia](https://github.com/shawnw3) |  [Asher James](https://github.com/asherjames) |  [Aaron Dekker](https://github.com/DefinitelyMaybe) | [Kavita Sreejith](https://github.com/KavitaSreejith) | [Aaron Yeoh](https://github.com/AaronYeoh)
 ###### Many thanks to our lead mentor [Logan Elliott](https://github.com/LoganElliott) from Wynyard Group and many others who helped us create something awesome over the course of one weekend. 
 
 
 ##See our site - It works!##
-Example: Try entering stop 7010
+Example:
+Try: stop 7010 (Britomart) | 7150 (38 Symonds Street)
+ 7094 (Victoria Street W)| 3515 (Takapuna)
 http://at1337.azurewebsites.net
 
 ##API site##
