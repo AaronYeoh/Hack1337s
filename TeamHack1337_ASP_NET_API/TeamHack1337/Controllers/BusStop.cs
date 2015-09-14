@@ -7,37 +7,69 @@ using System.Reflection;
 using System.Web;
 using Newtonsoft.Json;
 using TeamHack1337.Model;
+using System.Web.Caching;
 
 namespace TeamHack1337.Controllers
 {
     public class BusStop
     {
-        public string stop_code { get; set; }
-        public string stop_id { get; set; }
-        public string stop_lat { get; set; }
-        public string stop_lon { get; set; }
-        public List<Route> routes { get; set; }
-        // public string filename = "stop_list.txt";
-
-
+        public BusStopModel BusStopInstance { get; set; }
         public BusStop(string stop_code)
         {
-            this.stop_code = stop_code;
-            routes = new List<Route>();
-            
-            getStopID();
+            LoadStop(stop_code);
+        }
 
-            if (stop_id != null)
+
+        private void LoadStop(string stop_code)
+        {
+               
+            var Cache = HttpRuntime.Cache;
+            string cache_key = stop_code;
+            WebClient webClient = new WebClient();
+            string s;
+            object temp = null;
+            try
             {
-                getRoutes();
-                getArrivalTimes(stop_code);
+                temp = Cache.Get(cache_key);
+            }
+            catch
+            { //chomp!
+            }
+            if (temp != null)
+            {
+                BusStopInstance = temp as BusStopModel;
             }
             else
             {
-                Debug.WriteLine("Bad stop code");
-            }
+                BusStopInstance = new BusStopModel();         
+                BusStopInstance.stop_code = stop_code;
+                BusStopInstance.routes = new List<Route>();
 
+                getStopID(stop_code);
+
+                if (BusStopInstance.stop_id != null)
+                {
+                    getRoutes(stop_code);
+                }
+                else
+                {
+                    Debug.WriteLine("Bad stop code");
+                }
+
+                    
+                var expiration = DateTime.Now.AddDays(1);
+                var sliding = Cache.NoSlidingExpiration;
+                Cache.Insert(cache_key, BusStopInstance, null, expiration, sliding);
+                
+            }
+                       
+            if (BusStopInstance != null)
+            {
+                getArrivalTimes(stop_code); 
+            }
+           
         }
+
 
         public void getArrivalTimes(string stop_code)
         {
@@ -47,7 +79,7 @@ namespace TeamHack1337.Controllers
             string s = webClient.DownloadString("http://api.maxx.co.nz/RealTime/v2/Departures/Stop/" + stop_code);
             var json = JsonConvert.DeserializeObject<RealTimeBoardClass.RootObject>(s);
 
-            foreach (var route in routes)
+            foreach (var route in BusStopInstance.routes)
             {
                 try
                 {
@@ -91,21 +123,21 @@ namespace TeamHack1337.Controllers
             return shortTime;
         }
 
-        public void getRoutes()
+        public void getRoutes(string stop_code)
         {
             WebClient webClient = new WebClient();
             try
             {
                 string s =
-                    webClient.DownloadString("http://api.at.govt.nz/v1/gtfs/routes/stopid/" + stop_id +
+                    webClient.DownloadString("http://api.at.govt.nz/v1/gtfs/routes/stopid/" + BusStopInstance.stop_id +
                                              "?api_key=6fbfc488-fec6-4de0-abaa-3dc5afe31002");
                 var json = JsonConvert.DeserializeObject<BusStopList.RootObjectRoutes>(s);
 
                 foreach (var response in json.response)
                 {
-                    routes.Add(new Route(response.route_id, response.route_short_name, stop_code));
+                    BusStopInstance.routes.Add(new Route(response.route_id, response.route_short_name, stop_code));
                 }
-                Debug.WriteLine(routes.Count);
+                Debug.WriteLine(BusStopInstance.routes.Count);
             }
             catch (Exception e)
             {
@@ -115,7 +147,12 @@ namespace TeamHack1337.Controllers
 
 
 
-        public void getStopID()
+
+
+
+
+
+        public void getStopID(string stop_code)
         {
             //var stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("stop_list.txt");
             StopList stopList = new StopList();
@@ -126,9 +163,9 @@ namespace TeamHack1337.Controllers
             {
                 if (stop_code == stop.stop_code)
                 {
-                    stop_id = stop.stop_id;
-                    stop_lat = stop.stop_lat.ToString();
-                    stop_lon = stop.stop_lon.ToString();
+                    BusStopInstance.stop_id = stop.stop_id;
+                    BusStopInstance.stop_lat = stop.stop_lat.ToString();
+                    BusStopInstance.stop_lon = stop.stop_lon.ToString();
                 }
             }
 

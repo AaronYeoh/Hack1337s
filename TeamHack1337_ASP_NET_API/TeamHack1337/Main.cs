@@ -24,7 +24,7 @@ namespace TeamHack1337
                 //Create busstop
                 BusStop busStop = busStopCreator.CreateBusStop(parameters.stop_code.ToString());
 
-                string str = JsonConvert.SerializeObject(busStop);
+                string str = JsonConvert.SerializeObject(busStop.BusStopInstance);
                 var jsonBytes = Encoding.UTF8.GetBytes(str);
                 return new Response
                 {
