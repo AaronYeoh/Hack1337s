@@ -94,3 +94,15 @@ body {
   height:50px;
   margin-bottom:10px;
 }
+
+
+.loading{
+	background-image: url(ajax-loader.gif);
+	width: 120px;
+	height:50px;
+	margin-bottom:10px;
+	background-repeat: no-repeat;
+	background-position: 50% 50%;
+	color: transparent;
+	font-size: 0em;
+}

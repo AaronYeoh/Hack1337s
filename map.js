@@ -19,6 +19,8 @@ $(document).ready(function () {
 
 
   $('#bus-form').on('submit', function (event) {
+	  $('#bus-submit-btn').addClass('loading')
+	  
     busStopNum = $("#stopNumField").val();
     var requestURL = "http://at1337api.azurewebsites.net/stop_code=" + busStopNum;
     
@@ -36,9 +38,12 @@ $(document).ready(function () {
         console.log('updating map', data);
         updateMap(data);
 		$('.cover-container').addClass('cover-container-top');
+		$('#bus-submit-btn').removeClass('loading')
       },
       error: function () {
         console.log('error');
+		alert("Sorry, we can't find your bus stop routes right now.")
+		$('#bus-submit-btn').removeClass('loading')
       }
     });
     
