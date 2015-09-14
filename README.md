@@ -6,9 +6,11 @@
 
 
 ##See our site - It works!##
-Example:
-Try: stop 7010 (Britomart) | 7150 (38 Symonds Street)
- 7094 (Victoria Street W)| 3515 (Takapuna)
+Try these stops: 
+* 7010 (Britomart) 
+* 7150 (38 Symonds Street) 
+* 7094 (Victoria Street W) 
+* 3515 (Takapuna)
 http://at1337.azurewebsites.net
 
 ##API site##
