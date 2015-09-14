@@ -5,7 +5,7 @@
 ###### Many thanks to our lead mentor [Logan Elliott](https://github.com/LoganElliott) from Wynyard Group and many others who helped us create something awesome over the course of one weekend. 
 
 
-##See our site - It works!##
+##[See our site - It works!](http://at1337.azurewebsites.net)##
 Try these stops: 
 * 7010 (Britomart) 
 * 7150 (38 Symonds Street) 
